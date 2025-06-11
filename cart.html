@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="cart.css">
+<title>cart</title><body>
+
+    <div class="cart-container">
+        <div class="cart-header">Your Cart</div>
+    
+        <!-- Example of Cart Items -->
+        <div class="cart-item" data-price="50/-">
+            <img src="https://thumbs.dreamstime.com/b/assortment-red-fresh-tomatoes-wooden-boxes-sale-tomatoes-sale-99617686.jpg" alt="">
+            <div class="item-details">
+                <h3>Tomatoes</h3>
+                
+            </div>
+            <div class="quantity">
+                <button onclick="changeQuantity(this, -1)">-</button>
+                <input type="text" value="1" readonly>
+                <button onclick="changeQuantity(this, 1)">+</button>
+            </div>
+            <div class="item-price">Rs 50</div>
+            <span class="remove-btn" onclick="removeItem(this)">Remove</span>
+        </div>
+    
+        <div class="cart-item" data-price="30/-">
+            <img src="https://cdn-prod.medicalnewstoday.com/content/images/articles/282/282844/cauliflower-is-rich-in-nutrients-and-fiber.jpg" alt="">
+            <div class="item-details">
+                <h3>Cauliflower</h3>
+                
+            </div>
+            <div class="quantity">
+                <button onclick="changeQuantity(this, -1)">-</button>
+                <input type="text" value="1" readonly>
+                <button onclick="changeQuantity(this, 1)">+</button>
+            </div>
+            <div class="item-price">Rs 30</div>
+            <span class="remove-btn" onclick="removeItem(this)">Remove</span>
+        </div>
+    
+        <div class="cart-item" data-price="50/-">
+            <img src="https://tse3.mm.bing.net/th?id=OIP.M6vxJcBOAvgK6_trJXQsqQHaE7&pid=Api&P=0&h=180" alt="">
+            <div class="item-details">
+                <h3>Brinjal</h3>
+                
+            </div>
+            <div class="quantity">
+                <button onclick="changeQuantity(this, -1)">-</button>
+                <input type="text" value="1" readonly>
+                <button onclick="changeQuantity(this, 1)">+</button>
+            </div>
+            <div class="item-price">Rs 50</div>
+            <span class="remove-btn" onclick="removeItem(this)" color="black">Remove</span>
+        </div>
+    
+        <!-- Total Price -->
+        <div class="cart-total">Total: Rs <span id="total-price">130</span></div>
+    
+        <!-- Checkout Button -->
+         <a href="checkout.html">
+        <button class="checkout-btn">Proceed to Checkout</button>
+        </a>
+    </div>
+    
+    <script>
+        // Calculate initial total price
+        calculateTotal();
+    
+        // Function to update quantity and price
+        function changeQuantity(button, change) {
+            let quantityInput = button.parentElement.querySelector('input');
+            let quantity = parseInt(quantityInput.value) + change;
+            if (quantity < 1) quantity = 1;
+            quantityInput.value = quantity;
+            calculateTotal();
+        }
+    
+        // Function to remove an item
+        function removeItem(button) {
+            button.closest('.cart-item').remove();
+            calculateTotal();
+        }
+    
+        // Function to calculate the total price
+        function calculateTotal() {
+            let total = 0;
+            document.querySelectorAll('.cart-item').forEach(item => {
+                let price = parseInt(item.getAttribute('data-price'));
+                let quantity = parseInt(item.querySelector('input').value);
+                total += price * quantity;
+            });
+            document.getElementById('total-price').textContent = total;
+        }
+    
+        // Function to handle checkout action
+        function checkout() {
+            alert("Proceeding to Checkout. Total Amount: Rs " + document.getElementById('total-price').textContent);
+            // You can redirect to a payment page or further processing
+        }
+    </script>
+    
+    </body>
+    </html>
